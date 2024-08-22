@@ -1,559 +1,197 @@
-# README.md
-# ClaudeUI
-
-ClaudeUI is a chat interface for interacting with Claude, an AI assistant created by Anthropic. This project uses Python with Flask for the backend and React with Vite for the frontend.
-
-## Project Structure
-
-```
-claudeui/
-├── backend/
-│   ├── app.py
-│   └── requirements.txt
-├── frontend/
-│   ├── src/
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   └── main.jsx
-│   ├── index.html
-│   ├── package.json
-│   └── vite.config.js
-└── README.md
-```
-
-## Features
-
-- Real-time chat interface
-- Markdown rendering for Claude's responses
-- Ability to delete chat history
-- Responsive design
-
-## Prerequisites
-
-- Python (v3.7 or later)
-- Node.js (v14 or later)
-- npm or yarn
-
-## Setup and Installation
-
-### Backend
-
-1. Navigate to the backend directory:
-
-   ```
-   cd backend
-   ```
-
-2. Create a virtual environment (optional but recommended):
-
-   ```
-   python -m venv venv
-   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-   ```
-
-3. Install dependencies:
-
-   ```
-   pip install -r requirements.txt
-   ```
-
-4. Start the Flask server:
-   ```
-   python app.py
-   ```
-
-The backend will be available at `http://localhost:5000`.
-
-### Frontend
-
-1. Navigate to the frontend directory:
-
-   ```
-   cd frontend
-   ```
-
-2. Install dependencies:
-
-   ```
-   npm install
-   ```
-
-   or
-
-   ```
-   yarn install
-   ```
-
-3. Start the development server:
-   ```
-   npm run dev
-   ```
-   or
-   ```
-   yarn dev
-   ```
-
-The frontend will be available at `http://localhost:5173`.
-
-## Usage
-
-1. Ensure the backend server is running.
-2. Start the frontend development server.
-3. Open your browser and go to `http://localhost:5173`.
-4. Start chatting with Claude by typing your message and pressing Enter or clicking the Send button.
-5. Claude's responses will be displayed with markdown formatting.
-6. To clear the chat history, click the "Delete Chat History" button.
-
-## API Endpoints
-
-- `/api/chat` (POST): Send a message to Claude and receive a response.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## Acknowledgements
-
-- [Flask](https://flask.palletsprojects.com/)
-- [React](https://reactjs.org/)
-- [Vite](https://vitejs.dev/)
-- [Anthropic](https://www.anthropic.com/) for creating Claude
-
-
-# frontend/index.html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/chat-bot.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LLM UI</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
-
-
-# frontend/vite.config.js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-})
-
-
-# frontend/package.json
-{
-  "name": "frontend",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-markdown": "^9.0.1"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.9.0",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
-    "eslint": "^9.9.0",
-    "eslint-plugin-react": "^7.35.0",
-    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
-    "eslint-plugin-react-refresh": "^0.4.9",
-    "globals": "^15.9.0",
-    "vite": "^5.4.1"
-  }
-}
-
-
-# frontend/public/chat-bot.svg
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-<svg fill="#ffffff" width="800px" height="800px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
-
-<g id="SVGRepo_bgCarrier" stroke-width="0"/>
-
-<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-
-<g id="SVGRepo_iconCarrier">
-
-<defs>
-
-<style>.cls-1{fill:none;}</style>
-
-</defs>
-
-<title>chat-bot</title>
-
-<path d="M16,19a6.9908,6.9908,0,0,1-5.833-3.1287l1.666-1.1074a5.0007,5.0007,0,0,0,8.334,0l1.666,1.1074A6.9908,6.9908,0,0,1,16,19Z"/>
-
-<path d="M20,8a2,2,0,1,0,2,2A1.9806,1.9806,0,0,0,20,8Z"/>
-
-<path d="M12,8a2,2,0,1,0,2,2A1.9806,1.9806,0,0,0,12,8Z"/>
-
-<path d="M17.7358,30,16,29l4-7h6a1.9966,1.9966,0,0,0,2-2V6a1.9966,1.9966,0,0,0-2-2H6A1.9966,1.9966,0,0,0,4,6V20a1.9966,1.9966,0,0,0,2,2h9v2H6a3.9993,3.9993,0,0,1-4-4V6A3.9988,3.9988,0,0,1,6,2H26a3.9988,3.9988,0,0,1,4,4V20a3.9993,3.9993,0,0,1-4,4H21.1646Z"/>
-
-</g>
-
-</svg>
-
-# frontend/src/App.css
-#root {
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100%;
-}
-
-h1 {
-  margin: 0px 0px 20px;
-}
-
-.App {
-  font-family: Arial, sans-serif;
-  width: 100%;
-  max-width: 800px;
-  padding: 20px;
-  text-align: center;
-  height: 100vh;
-}
-
-.chat-container {
-  height: 66vh;
-  overflow-y: auto;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
-.message {
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: left;
-}
-
-.user {
-  background-color: #444444;
-}
-
-.bot {
-  background-color: #333333;
-}
-
-.message-indicator {
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.message-text {
-  word-wrap: break-word;
-}
-
-.message-text pre {
-  background-color: #1e1e1e;
-  padding: 10px;
-  border-radius: 5px;
-  overflow-x: auto;
-}
-
-.message-text code {
-  font-family: "Courier New", Courier, monospace;
-}
-
-.input-container {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-input {
-  flex-grow: 1;
-  padding: 10px;
-  font-size: 16px;
-}
-
-.delete-button {
-  background-color: #dc3545;
-  margin-top: 10px;
-  width: 100%;
-}
-
-.delete-button:hover {
-  background-color: #c82333;
-}
-
-
-# frontend/src/index.css
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #444444;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #555555;
-}
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-
-# frontend/src/main.jsx
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
-
-
-# frontend/src/App.jsx
-import { useState, useRef, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
-import "./App.css";
-
-function App() {
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const chatContainerRef = useRef(null);
-
-  useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
-    }
-  }, [messages]);
-
-  const sendMessage = async () => {
-    if (input.trim() === "" || isLoading) return;
-
-    const newMessages = [...messages, { text: input, sender: "user" }];
-    setMessages(newMessages);
-    setInput("");
-    setIsLoading(true);
-
-    try {
-      const response = await fetch("http://127.0.0.1:5000/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: input }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-
-      let botResponse = "";
-      setMessages([...newMessages, { text: "", sender: "bot" }]);
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        const chunk = decoder.decode(value);
-        botResponse += chunk;
-
-        setMessages((prevMessages) => {
-          const updatedMessages = [...prevMessages];
-          updatedMessages[updatedMessages.length - 1] = {
-            text: botResponse,
-            sender: "bot",
-          };
-          return updatedMessages;
-        });
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { text: "Error: Could not get response", sender: "bot" },
-      ]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const deleteChatHistory = () => {
-    setMessages([]);
-  };
-
-  return (
-    <div className="App">
-      <h1>Claude Chatbot</h1>
-      <div className="chat-container" ref={chatContainerRef}>
-        {messages.map((message, index) => (
-          <div key={index} className={`message ${message.sender}`}>
-            <span className="message-indicator">
-              {message.sender === "user" ? "User: " : "Claude: "}
-            </span>
-            <span className="message-text">
-              {message.sender === "user" ? (
-                message.text
-              ) : (
-                <ReactMarkdown>{message.text}</ReactMarkdown>
-              )}
-            </span>
-          </div>
-        ))}
-      </div>
-      <div className="input-container">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && sendMessage()}
-          placeholder="Type a message..."
-          disabled={isLoading}
-        />
-        <button onClick={sendMessage} disabled={isLoading}>
-          Send
-        </button>
-      </div>
-      <button onClick={deleteChatHistory} className="delete-button">
-        Delete Chat History
-      </button>
-    </div>
-  );
-}
-
-export default App;
-
-
-# frontend/src/assets/react.svg
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="35.93" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 228"><path fill="#00D8FF" d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844Zm-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14Zm-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193ZM87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94ZM50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979Zm12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887Zm110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322Zm-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18ZM82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897Zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147Zm37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486Zm52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565Zm-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722Zm22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3ZM128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86Z"></path></svg>
-
-# backend/requirements.txt
-Flask==3.0.3
-Flask-Cors==4.0.1
-anthropic==0.34.0
-python-dotenv==1.0.1
-gunicorn==21.2.0
-
-# backend/app.py
-from flask import Flask, request, jsonify, Response
-from flask_cors import CORS
+# requirements.txt
+annotated-types==0.7.0
+anthropic==0.34.1
+anyio==4.4.0
+beautifulsoup4==4.12.3
+bs4==0.0.2
+certifi==2024.7.4
+cffi==1.17.0
+charset-normalizer==3.3.2
+distro==1.9.0
+dkimpy==1.1.8
+dnspython==2.6.1
+filelock==3.15.4
+fsspec==2024.6.1
+git-filter-repo==2.45.0
+h11==0.14.0
+httpcore==1.0.5
+httpx==0.27.0
+huggingface-hub==0.24.6
+idna==3.7
+jiter==0.5.0
+packaging==24.1
+patatt==0.6.3
+pycparser==2.22
+pydantic==2.8.2
+pydantic_core==2.20.1
+PyNaCl==1.5.0
+PyYAML==6.0.2
+requests==2.32.3
+sniffio==1.3.1
+soupsieve==2.6
+tokenizers==0.20.0
+tqdm==4.66.5
+typing_extensions==4.12.2
+urllib3==2.2.2
+
+
+# chat_with_cache.py
+import anthropic
+import time
 import os
-from anthropic import Anthropic
-import logging
 
-app = Flask(__name__)
-CORS(app)
+client = anthropic.Anthropic()
+MODEL_NAME = "claude-3-5-sonnet-20240620"
 
-# Set up logging
-logging.basicConfig(level=logging.DEBUG)
-
-anthropic = Anthropic()
-
-@app.route('/api/chat', methods=['POST'])
-def chat():
-    data = request.json
-    user_message = data.get('message')
+def read_codebase_content():
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(script_dir, 'output.txt')
     
-    if not user_message:
-        return jsonify({"error": "No message provided"}), 400
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return file.read()
+    except FileNotFoundError:
+        print(f"Error: The file 'output.txt' was not found in {script_dir}")
+        return None
+    except Exception as e:
+        print(f"An error occurred while reading the file: {str(e)}")
+        return None
 
-    def generate():
-        try:
-            app.logger.info(f"Sending message to Claude: {user_message}")
-            with anthropic.messages.stream(
-                max_tokens=1000,
-                messages=[{"role": "user", "content": user_message}],
-                model="claude-3-5-sonnet-20240620"
-            ) as stream:
-                for text in stream.text_stream:
-                    yield text
+def send_message_to_claude(codebase_content, user_message):
+    messages = [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "<codebase>" + codebase_content + "</codebase>",
+                    "cache_control": {"type": "ephemeral"}
+                },
+                {
+                    "type": "text",
+                    "text": user_message
+                }
+            ]
+        }
+    ]
+
+    start_time = time.time()
+    response = client.messages.create(
+        model=MODEL_NAME,
+        max_tokens=1000,
+        messages=messages,
+        extra_headers={"anthropic-beta": "prompt-caching-2024-07-31"}
+    )
+    end_time = time.time()
+
+    print(f"\nAPI call time: {end_time - start_time:.2f} seconds")
+    print(f"Input tokens: {response.usage.input_tokens}")
+    print(f"Output tokens: {response.usage.output_tokens}")
+    print("\nClaude's response:")
+    print(response.content[0].text)
+
+    return response
+
+def main():
+    # Read the content of the codebase from output.txt
+    codebase_content = read_codebase_content()
+
+    if codebase_content is None:
+        print("Exiting due to file read error.")
+        exit(1)
+
+    print(f"Read {len(codebase_content)} characters from the codebase.")
+
+    # Start conversation
+    print("Starting conversation with Claude. Type 'exit' to end the conversation.")
+    while True:
+        user_input = input("\nYour message: ")
+        if user_input.lower() == 'exit':
+            break
+        
+        send_message_to_claude(codebase_content, user_input)
+
+if __name__ == "__main__":
+    main()
+
+# output.txt
+
+
+# get_codebase.py
+import os
+
+def write_directory_contents_to_file(directory_path, output_file_path):
+    # Files and directories to ignore
+    ignore_list = {'__pycache__', '.venv', '.gitignore', 'package-lock.json', 'eslint.config.js', 'node_modules', '.git', 'DS_Store'}
+    
+    print(f"Starting to process directory: {directory_path}")
+    print(f"Output will be written to: {output_file_path}")
+    
+    with open(output_file_path, 'w', encoding='utf-8') as output_file:
+        for root, dirs, files in os.walk(directory_path):
+            print(f"Current directory: {root}")
+            
+            # Remove ignored directories from dirs to prevent them from being searched
+            dirs[:] = [d for d in dirs if d not in ignore_list]
+            print(f"Subdirectories (after ignoring): {dirs}")
+            
+            print(f"Files: {files}")
+            
+            for file in files:
+                if file not in ignore_list:
+                    file_path = os.path.join(root, file)
+                    relative_path = os.path.relpath(file_path, directory_path)
                     
-        except Exception as e:
-            app.logger.error(f"Error in /api/chat: {str(e)}", exc_info=True)
-            yield str(e)
+                    print(f"Processing file: {relative_path}")
+                    
+                    # Write the file path as a comment
+                    output_file.write(f"# {relative_path}\n")
+                    
+                    # Read and write the contents of the file
+                    try:
+                        with open(file_path, 'r', encoding='utf-8') as input_file:
+                            content = input_file.read()
+                            output_file.write(content)
+                            print(f"Successfully wrote contents of {relative_path}")
+                    except UnicodeDecodeError:
+                        output_file.write("# Binary file, contents not shown\n")
+                        print(f"Skipped binary file: {relative_path}")
+                    except Exception as e:
+                        print(f"Error processing {relative_path}: {str(e)}")
+                    
+                    # Add a newline for separation
+                    output_file.write('\n\n')
+                else:
+                    print(f"Ignored file: {file}")
 
-    return Response(generate(), mimetype='text/plain')
+    print("Finished processing all files")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    # Prompt user for directory path, use current directory if no input
+    directory_path = input("Enter the directory path to process (press Enter for current directory): ").strip()
+    
+    if not directory_path:
+        directory_path = os.getcwd()
+        print(f"Using current directory: {directory_path}")
+    else:
+        # Expand user home directory if needed
+        directory_path = os.path.expanduser(directory_path)
+    
+    # Check if the directory exists
+    if not os.path.isdir(directory_path):
+        print(f"Error: The directory '{directory_path}' does not exist.")
+        exit(1)
+    
+    # Prompt user for output file path, use default if no input
+    output_file_path = input("Enter the output file path (press Enter for 'output.txt'): ").strip()
+    
+    if not output_file_path:
+        output_file_path = 'output.txt'
+        print(f"Using default output file: {output_file_path}")
+    
+    write_directory_contents_to_file(directory_path, output_file_path)
+    
+    print(f"Check if output file exists: {os.path.exists(output_file_path)}")
+    if os.path.exists(output_file_path):
+        print(f"Output file size: {os.path.getsize(output_file_path)} bytes")
 
