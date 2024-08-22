@@ -1,10 +1,8 @@
-# write_directory_contents.py
-
 import os
 
 def write_directory_contents_to_file(directory_path, output_file_path):
     # Files and directories to ignore
-    ignore_list = {'venv', '.gitignore', 'package-lock.json', 'eslint.config.js', 'node_modules', '.git', 'DS_Store'}
+    ignore_list = {'__pycache__', '.venv', '.gitignore', 'package-lock.json', 'eslint.config.js', 'node_modules', '.git', 'DS_Store'}
     
     print(f"Starting to process directory: {directory_path}")
     print(f"Output will be written to: {output_file_path}")
@@ -49,8 +47,28 @@ def write_directory_contents_to_file(directory_path, output_file_path):
     print("Finished processing all files")
 
 if __name__ == "__main__":
-    directory_path = os.path.expanduser('~/Documents/chat-app')
-    output_file_path = 'output.txt'
+    # Prompt user for directory path, use current directory if no input
+    directory_path = input("Enter the directory path to process (press Enter for current directory): ").strip()
+    
+    if not directory_path:
+        directory_path = os.getcwd()
+        print(f"Using current directory: {directory_path}")
+    else:
+        # Expand user home directory if needed
+        directory_path = os.path.expanduser(directory_path)
+    
+    # Check if the directory exists
+    if not os.path.isdir(directory_path):
+        print(f"Error: The directory '{directory_path}' does not exist.")
+        exit(1)
+    
+    # Prompt user for output file path, use default if no input
+    output_file_path = input("Enter the output file path (press Enter for 'output.txt'): ").strip()
+    
+    if not output_file_path:
+        output_file_path = 'output.txt'
+        print(f"Using default output file: {output_file_path}")
+    
     write_directory_contents_to_file(directory_path, output_file_path)
     
     print(f"Check if output file exists: {os.path.exists(output_file_path)}")
