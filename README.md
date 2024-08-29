@@ -1,4 +1,4 @@
-# Codebase Analyzer with Claude AI
+# Codebase Unifier with Claude AI
 
 This project provides a set of tools to analyze and interact with a codebase using Claude AI. It extracts the contents of a codebase into a single file and allows for interactive conversations about the code using Claude's advanced language model.
 
@@ -28,8 +28,8 @@ This project provides a set of tools to analyze and interact with a codebase usi
 1. Clone this repository:
 
    ```
-   git clone https://github.com/yourusername/codebase-analyzer.git
-   cd codebase-analyzer
+   git clone https://github.com/yourusername/codebase-unifier.git
+   cd codebase-unifier
    ```
 
 2. Create and activate a virtual environment:
