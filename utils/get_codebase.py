@@ -94,30 +94,3 @@ if __name__ == "__main__":
     print(f"Check if output file exists: {os.path.exists(output_file_path)}")
     if os.path.exists(output_file_path):
         print(f"Output file size: {os.path.getsize(output_file_path)} bytes")
-
-if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python script.py <directory_path> <file1> <file2> ...")
-        sys.exit(1)
-
-    directory_path = sys.argv[1]
-    file_list = sys.argv[2:]
-
-    # Check if the directory exists
-    if not os.path.isdir(directory_path):
-        print(f"Error: The directory '{directory_path}' does not exist.")
-        exit(1)
-
-    # Create 'data' directory if it doesn't exist
-    data_dir = os.path.join(os.getcwd(), 'data')
-    os.makedirs(data_dir, exist_ok=True)
-
-    # Use a default output file name
-    output_file_name = 'output.txt'
-    output_file_path = os.path.join(data_dir, output_file_name)
-
-    write_directory_contents_to_file(directory_path, output_file_path, file_list)
-
-    print(f"Check if output file exists: {os.path.exists(output_file_path)}")
-    if os.path.exists(output_file_path):
-        print(f"Output file size: {os.path.getsize(output_file_path)} bytes")
